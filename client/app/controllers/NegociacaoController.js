@@ -10,29 +10,39 @@ class NegociacaoController {
         this._negociacoes = new Bind(
             new Negociacoes(),
             new NegociacoesView('#negociacoes'),
-            ['adiciona', 'esvazia']
+            'adiciona', 'esvazia'
         );
-
-        this._negociacoesView = new NegociacoesView('#negociacoes');
-        this._negociacoesView.update(this._negociacoes);
 
         this._mensagem = new Bind(
             new Mensagem(),
             new MensagemView('#mensagemView'),
-            ['texto']
+            'texto'
         );
-
-        this._mensagem = new Mensagem();
-        this._mensagemView = new MensagemView('#mensagemView');
-        this._mensagemView.update(this._mensagem);
     }
+
     adiciona(event) {
 
-        event.preventDefault();
-        this._negociacoes.adiciona(this._criaNegociacao());
-        this._mensagem.texto = 'Negociação adicionada com sucesso';
+        try {
 
-        this._limpaFormulario();
+            event.preventDefault();
+            this._negociacoes.adiciona(this._criaNegociacao());
+            this._mensagem.texto = 'Negociação adicionada com sucesso';
+            this._limpaFormulario();
+
+        } catch (err) {
+
+            console.log(err);
+            console.log(err.stack);
+
+            if (err instanceof DataInvalidaException) {
+
+                this._mensagem.texto = err.message;
+
+            } else {
+
+                this._mensagem.texto = 'Um erro não esperado aconteceu. Entre em contato com o suporte';
+            }
+        }
     }
 
     _limpaFormulario() {
@@ -56,6 +66,5 @@ class NegociacaoController {
 
         this._negociacoes.esvazia();
         this._mensagem.texto = 'Negociações apagadas com sucesso';
-
     }
 }
