@@ -6,4 +6,4 @@ document
 
 document
   .querySelector('#botao-apaga')
-  .addEventListener('click', controller.apaga.bind(controller))  
+  .addEventListener('click', controller.apaga.bind(controller));
