@@ -1,7 +1,7 @@
 class NegociacaoController {
 
     constructor() {
-        thi._init()
+        this._init()
 
         const $ = document.querySelector.bind(document);
         this._inputData = $('#data');
@@ -22,10 +22,9 @@ class NegociacaoController {
 
         this._service = new NegociacaoService();
     }
-    
+
     _init() {
-        DaoFactory
-            .getNegociacaoDao()
+        getNegociacaoDao()
             .then(dao => dao.listaTodos())
             .then(negociacoes =>
                 negociacoes.forEach(negociacao =>
@@ -41,8 +40,7 @@ class NegociacaoController {
             //Negociação que precisamos incluir no banco de dados
             const negociacao = this._criaNegociacao()
 
-            DaoFactory
-                .getNegociacaoDao()
+            getNegociacaoDao()
                 .then(dao => dao.adiciona(negociacao))
                 .then(() => {
                     //só tentará incluir na tabela se conseguiu antes incluir no banco
@@ -85,9 +83,13 @@ class NegociacaoController {
     }
 
     apaga() {
-
-        this._negociacoes.esvazia();
-        this._mensagem.texto = 'Negociações apagadas com sucesso';
+        getNegociacaoDao()
+            .then(dao => dao.apagaTodos())
+            .then(() => {
+                this._negociacoes.esvazia();
+                this._mensagem.texto = 'Negociações	apagadas	com	sucesso';
+            })
+            .catch(err => this._mensagem.texto = err);
     }
 
     importaNegociacoes() {
