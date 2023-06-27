@@ -1,30 +1,41 @@
-class HttpService {
+System.register([], function (_export, _context) {
+            "use strict";
 
-  get(url) {
+            return {
+                        setters: [],
+                        execute: function () {
+                                    class HttpService {
 
-      return new Promise((resolve, reject) => {
+                                                get(url) {
 
-          const xhr = new XMLHttpRequest();
+                                                            return new Promise((resolve, reject) => {
 
-          xhr.open('GET', url);
+                                                                        const xhr = new XMLHttpRequest();
 
-          xhr.onreadystatechange = () => {
+                                                                        xhr.open('GET', url);
 
-              if (xhr.readyState == 4) {
+                                                                        xhr.onreadystatechange = () => {
 
-                  if (xhr.status == 200) {
+                                                                                    if (xhr.readyState == 4) {
 
-                      resolve(JSON.parse(xhr.responseText));
-                  } else {
+                                                                                                if (xhr.status == 200) {
 
-                      console.log(xhr.responseText);
-                      reject(xhr.responseText);
-                  }
-              }
-          };
+                                                                                                            resolve(JSON.parse(xhr.responseText));
+                                                                                                } else {
 
-          xhr.send();
+                                                                                                            console.log(xhr.responseText);
+                                                                                                            reject(xhr.responseText);
+                                                                                                }
+                                                                                    }
+                                                                        };
 
-      });
-  }
-}
+                                                                        xhr.send();
+                                                            });
+                                                }
+                                    }
+
+                                    _export('HttpService', HttpService);
+                        }
+            };
+});
+//# sourceMappingURL=HttpService.js.map

@@ -1,31 +1,40 @@
-class Negociacoes {
+System.register([], function (_export, _context) {
+  "use strict";
 
-  constructor() {
+  return {
+    setters: [],
+    execute: function () {
+      class Negociacoes {
 
-    this._negociacoes = [];
-    Object.freeze(this);
-  }
+        constructor() {
 
+          this._negociacoes = [];
+          Object.freeze(this);
+        }
 
-  adiciona(negociacao) {
+        adiciona(negociacao) {
 
-    this._negociacoes.push(negociacao);
-  }
+          this._negociacoes.push(negociacao);
+        }
 
-  paraArray() {
+        paraArray() {
 
-    return [].concat(this._negociacoes);
-  }
+          return [].concat(this._negociacoes);
+        }
 
-  get volumeTotal() {
+        get volumeTotal() {
 
-    return this._negociacoes
-      .reduce((total, negociacao) =>
-        total + negociacao.volume, 0);
-  }
+          return this._negociacoes.reduce((total, negociacao) => total + negociacao.volume, 0);
+        }
 
-  esvazia() {
+        esvazia() {
 
-    this._negociacoes.length = 0;
-  }
-}
+          this._negociacoes.length = 0;
+        }
+      }
+
+      _export("Negociacoes", Negociacoes);
+    }
+  };
+});
+//# sourceMappingURL=Negociacoes.js.map

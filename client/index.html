@@ -68,13 +68,10 @@
     <br />
 
     <div id="negociacoes"></div>
-    <!--importou a biblioteca do system.js-->
-    <script src="node_modules/systemjs/dist/system.js"></script>
 
-    <!--indicando qual será o primeiro módulo a ser carregado-->
+    <script src="node_modules/systemjs/dist/system.js"></script>
     <script>
-      System.import('app/app.js')
-      .catch(err	=>	console.error(err));
+      System.import("app/app.js").catch((err) => console.error(err));
     </script>
   </body>
 </html>
