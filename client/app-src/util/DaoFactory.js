@@ -1,9 +1,8 @@
 import { NegociacaoDao } from '../domain/negociacao/NegociacaoDao.js';
 import { ConnectionFactory } from './ConnectionFactory.js';
 
-export function getNegociacaoDao() {
+export async function getNegociacaoDao() {
 
-  return ConnectionFactory
-    .getConnection()
-    .then(conn => new NegociacaoDao(conn));
+  let conn = await ConnectionFactory.getConnection();
+  return new NegociacaoDao(conn);
 }
