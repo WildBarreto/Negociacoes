@@ -1,32 +1,36 @@
 import { Negociacao, NegociacaoService, Negociacoes } from '../domain/index.js';
 import { DateConverter, Mensagem, MensagemView, NegociacoesView } from '../ui/index.js';
-import { Bind, getExceptionMessage, getNegociacaoDao } from '../util/index.js';
+import { Bind, controller, debounce, getExceptionMessage, getNegociacaoDao } from '../util/index.js';
+
+@controller('#data', '#quantidade', '#valor')
 
 export class NegociacaoController {
 
-    constructor() {
-
-        const $ = document.querySelector.bind(document);
-        this._inputData = $('#data');
-        this._inputQuantidade = $('#quantidade');
-        this._inputValor = $('#valor');
-
+    //	OS	PARÂMETROS	AGORA	COMEÇAM	COM	UNDERLINE
+    constructor(_inputData, _inputQuantidade, _inputValor) {
+        //	UMA	ÚNICA	INSTRUÇÃO
+        Object.assign(this, {
+            _inputData, _inputQuantidade, _inputValor
+        })
         this._negociacoes = new Bind(
             new Negociacoes(),
             new NegociacoesView('#negociacoes'),
             'adiciona', 'esvazia'
         );
-
         this._mensagem = new Bind(
             new Mensagem(),
             new MensagemView('#mensagemView'),
             'texto'
         );
-
         this._service = new NegociacaoService();
-
         this._init();
     }
+
+    @debounce(1500)
+    async importaNegociacoes() {
+        //	código	omitido
+    }
+
 
     async _init() {
 

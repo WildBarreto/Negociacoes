@@ -40,6 +40,7 @@ System.register(['../domain/negociacao/NegociacaoDao.js', './ConnectionFactory.j
 
       let getNegociacaoDao = (() => {
         var _ref = _asyncToGenerator(function* () {
+
           let conn = yield ConnectionFactory.getConnection();
           return new NegociacaoDao(conn);
         });

@@ -8,7 +8,7 @@ System.register([], function (_export, _context) {
       let connection = null;
       let close = null;
 
-      class ConnectionFactory {
+      let ConnectionFactory = class ConnectionFactory {
 
         constructor() {
 
@@ -65,7 +65,7 @@ System.register([], function (_export, _context) {
             close();
           }
         }
-      }
+      };
 
       _export('ConnectionFactory', ConnectionFactory);
     }
