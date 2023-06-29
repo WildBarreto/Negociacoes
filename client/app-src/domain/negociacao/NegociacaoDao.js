@@ -1,86 +1,86 @@
-import { Negociacao } from './Negociacao.js';
+import { Negociacao } from './Negociacao';
 
 export class NegociacaoDao {
 
-  constructor(connection) {
+    constructor(connection) {
 
-    this._connection = connection;
-    this._store = 'negociacoes';
-  }
+        this._connection = connection;
+        this._store = 'negociacoes';
+    }
 
 
-  adiciona(negociacao) {
+    adiciona(negociacao) {
 
-    return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
 
-      const request = this._connection
-        .transaction([this._store], 'readwrite')
-        .objectStore(this._store)
-        .add(negociacao);
+            const request = this._connection
+                .transaction([this._store], 'readwrite')
+                .objectStore(this._store)
+                .add(negociacao);
 
-      request.onsuccess = e => resolve();
-      request.onerror = e => {
+            request.onsuccess = e => resolve();
+            request.onerror = e => {
 
-        console.log(e.target.error);
-        reject('Não foi possível salvar a negociação');
-      }
-    });
-  }
-  listaTodos() {
+                console.log(e.target.error);
+                reject('Não foi possível salvar a negociação');
+            }
+        });
+    }
+    listaTodos() {
 
-    return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
 
-      const negociacoes = [];
+            const negociacoes = [];
 
-      const cursor = this._connection
-        .transaction([this._store], 'readwrite')
-        .objectStore(this._store)
-        .openCursor();
+            const cursor = this._connection
+                .transaction([this._store], 'readwrite')
+                .objectStore(this._store)
+                .openCursor();
 
-      cursor.onsuccess = e => {
+            cursor.onsuccess = e => {
 
-        const atual = e.target.result;
+                const atual = e.target.result;
 
-        if (atual) {
+                if (atual) {
 
-          const negociacao = new Negociacao(
-            atual.value._data,
-            atual.value._quantidade,
-            atual.value._valor);
+                    const negociacao = new Negociacao(
+                        atual.value._data,
+                        atual.value._quantidade,
+                        atual.value._valor);
 
-          negociacoes.push(negociacao);
-          atual.continue();
+                    negociacoes.push(negociacao);
+                    atual.continue();
 
-        } else {
+                } else {
 
-          resolve(negociacoes);
-        }
-      };
+                    resolve(negociacoes);
+                }
+            };
 
-      cursor.onerror = e => {
-        console.log(e.target.error);
-        reject('Não foi possível listar nas negociações');
-      }
+            cursor.onerror = e => {
+                console.log(e.target.error);
+                reject('Não foi possível listar nas negociações');
+            }
 
-    });
-  }
+        });
+    }
 
-  apagaTodos() {
+    apagaTodos() {
 
-    return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
 
-      const request = this._connection
-        .transaction([this._store], 'readwrite')
-        .objectStore(this._store)
-        .clear();
+            const request = this._connection
+                .transaction([this._store], 'readwrite')
+                .objectStore(this._store)
+                .clear();
 
-      request.onsuccess = e => resolve();
+            request.onsuccess = e => resolve();
 
-      request.onerror = e => {
-        console.log(e.target.error);
-        reject('Não foi possível apagar as negociações');
-      };
+            request.onerror = e => {
+                console.log(e.target.error);
+                reject('Não foi possível apagar as negociações');                
+            };
 
-    });
-  }
+        });
+    }    
 }

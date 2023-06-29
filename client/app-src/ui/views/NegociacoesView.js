@@ -1,5 +1,5 @@
-import { DateConverter } from '../converters/DateConverter.js';
-import { View } from './View.js';
+import { DateConverter } from '../converters/DateConverter';
+import { View } from './View';
 
 export class NegociacoesView extends View {
 
@@ -18,7 +18,7 @@ export class NegociacoesView extends View {
             
             <tbody>
                 ${model.paraArray().map(negociacao =>
-            `
+                `
                     <tr>
                         <td>${DateConverter.paraTexto(negociacao.data)}</td>
                         <td>${negociacao.quantidade}</td>

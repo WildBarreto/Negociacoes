@@ -1,12 +1,10 @@
-export * from './ApplicationException.js';
-export * from './Bind.js';
-export * from './ConnectionFactory.js';
-export * from './DaoFactory.js';
-export * from './HttpService.js';
-export * from './ProxyFactory.js';
-export * from './decorators/Debounce.js';
-//	exportou!
-export * from './Obrigatorio.js';
-export * from './decorators/BindEvent.js';
-export * from './decorators/Controller.js';
-
+export * from './ApplicationException';
+export * from './Bind';
+export * from './ConnectionFactory';
+export * from './DaoFactory';
+export * from './HttpService';
+export * from './Obrigatorio';
+export * from './ProxyFactory';
+export * from './decorators/BindEvent';
+export * from './decorators/Controller';
+export * from './decorators/Debounce';
